@@ -30,6 +30,13 @@ public class Car {
     @JoinColumn(name = "engine_id", foreignKey = @ForeignKey(name = "ENGINE_ID_FK"))
     private Engine engine;
 
+    @ManyToOne(cascade = {CascadeType.PERSIST,
+                            CascadeType.MERGE,
+                            CascadeType.DETACH,
+                            CascadeType.REFRESH})
+    @JoinColumn(name = "car_body_type_id", foreignKey = @ForeignKey(name = "CAR_BODY_TYPE_ID_FK"))
+    private CarBodyType carBodyType;
+
     @ManyToMany(cascade = {CascadeType.PERSIST,
                             CascadeType.MERGE,
                             CascadeType.DETACH,
@@ -103,6 +110,14 @@ public class Car {
         this.engine = engine;
     }
 
+    public CarBodyType getCarBodyType() {
+        return carBodyType;
+    }
+
+    public void setCarBodyType(CarBodyType carBodyType) {
+        this.carBodyType = carBodyType;
+    }
+
     public Set<Driver> getDrivers() {
         return drivers;
     }
@@ -136,8 +151,9 @@ public class Car {
                 + "id=" + id
                 + ", model='" + model + '\''
                 + ", manufacturer='" + manufacturer + '\''
-                + ", yearOfIssue='" + yearOfIssue + '\''
+                + ", yearOfIssue=" + yearOfIssue
                 + ", engine=" + engine
+                + ", carBodyType=" + carBodyType
                 + ", drivers=" + drivers
                 + '}';
     }

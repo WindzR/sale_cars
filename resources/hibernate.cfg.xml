@@ -18,7 +18,13 @@
         <property name="hibernate.jdbc.time_zone">Europe/Moscow</property>
 
         <mapping class="ru.bodin.entity.Car" />
-        <mapping class="ru.bodin.entity.Driver" />
+        <mapping class="ru.bodin.entity.CarBodyType" />
         <mapping class="ru.bodin.entity.Engine" />
+        <mapping class="ru.bodin.entity.Driver" />
+        <mapping class="ru.bodin.entity.Announcement" />
+        <mapping class="ru.bodin.entity.City" />
+        <mapping class="ru.bodin.entity.Image" />
+        <mapping class="ru.bodin.entity.User" />
+        <mapping class="ru.bodin.entity.Role" />
     </session-factory>
 </hibernate-configuration>
