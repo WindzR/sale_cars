@@ -37,6 +37,17 @@ public class Car {
     @JoinColumn(name = "car_body_type_id", foreignKey = @ForeignKey(name = "CAR_BODY_TYPE_ID_FK"))
     private CarBodyType carBodyType;
 
+    @OneToMany(cascade = {CascadeType.PERSIST,
+                            CascadeType.MERGE,
+                            CascadeType.DETACH,
+                            CascadeType.REFRESH})
+    @JoinTable(
+            name = "car_announcements",
+            joinColumns = @JoinColumn(name = "car_id"),
+            inverseJoinColumns = @JoinColumn(name = "announcement_id")
+    )
+    private Set<Announcement> announcements = new HashSet<>();
+
     @ManyToMany(cascade = {CascadeType.PERSIST,
                             CascadeType.MERGE,
                             CascadeType.DETACH,
@@ -118,6 +129,14 @@ public class Car {
         this.carBodyType = carBodyType;
     }
 
+    public Set<Announcement> getAnnouncements() {
+        return announcements;
+    }
+
+    public void setAnnouncements(Set<Announcement> announcements) {
+        this.announcements = announcements;
+    }
+
     public Set<Driver> getDrivers() {
         return drivers;
     }
@@ -154,6 +173,7 @@ public class Car {
                 + ", yearOfIssue=" + yearOfIssue
                 + ", engine=" + engine
                 + ", carBodyType=" + carBodyType
+                + ", announcements=" + announcements
                 + ", drivers=" + drivers
                 + '}';
     }

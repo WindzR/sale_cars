@@ -31,6 +31,17 @@ public class Announcement {
                             CascadeType.MERGE,
                             CascadeType.DETACH,
                             CascadeType.REFRESH})
+    @JoinTable(
+            name = "car_announcements",
+            joinColumns = @JoinColumn(name = "announcement_id"),
+            inverseJoinColumns = @JoinColumn(name = "car_id")
+    )
+    private Car car;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST,
+                            CascadeType.MERGE,
+                            CascadeType.DETACH,
+                            CascadeType.REFRESH})
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -104,6 +115,14 @@ public class Announcement {
         isSold = sold;
     }
 
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
     public User getUser() {
         return user;
     }
@@ -155,6 +174,7 @@ public class Announcement {
                 + ", price=" + price
                 + ", description='" + description + '\''
                 + ", isSold=" + isSold
+                + ", car=" + car
                 + ", user=" + user
                 + ", city=" + city
                 + ", image=" + image
